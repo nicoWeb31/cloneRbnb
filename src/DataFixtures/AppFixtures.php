@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Ad;
 use Faker\Factory;
-use Cocur\Slugify\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -14,7 +13,7 @@ class AppFixtures extends Fixture
     {
 
         $faker = Factory::create('FR-fr');
-        $slugyFy = new Slugify();
+
         
         for($i = 1; $i < 30 ; $i++){
 
@@ -24,7 +23,7 @@ class AppFixtures extends Fixture
             
             $ad = new Ad();
             $ad->setTitle($title)
-                ->setSlug($slugyFy->slugify($title))
+
                 ->setContent($content)
                 ->setRooms(mt_rand(1,5))
                 ->setPrice(mt_rand(40,300))
