@@ -11,6 +11,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
+        $faker = Factory::create('')
+
         
         for($i = 1; $i < 30 ; $i++){
             
