@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos magnifique annonce{% endblock %}
+
+{% block body %}
+<div class="_ad-title" style="background-image: url({{ad.coverImage}});" >
+
+    <div class="container">
+        <h1 class="my-4">{{ad.title}}</h1>
+        <p>{{ad.introduction}}</p>
+        <p class="h2">
+            <strong>{{ad.rooms}} Chambres</strong> pour <strong>{{ad.price}} €</strong> par nuit
+        </p>
+
+
+            <a href="#" class="btn btn-primary"> Réserver !</a>
+
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mb-3">
+                {{ ad.content }}
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="http://plachold.it/64x64" alt="avatar">
+                    </div>
+                    <div class="col">
+                        <h3>Toto</h3>
+                        <span class="badge badge-info"> 3 annonces</span>
+                    </div>
+                </div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus, dolorem ipsa pariatur tenetur asperiores autem officiis atque ut expedita inventore!</p>
+                <p>Dolore, quam, praesentium similique aut quia, odit unde accusamus sapiente beatae fuga veritatis ex molestiae neque ratione laboriosam doloremque expedita!</p>
+                <p>Excepturi, asperiores possimus aut consequatur quia earum cum! Quo, esse officia eum amet dignissimos nemo accusamus inventore dolorem consectetur numquam.</p>
+
+            </div>
+        </div>
+    </div>
+    
+
+
+</div>
+
+
+
+{% endblock %}
