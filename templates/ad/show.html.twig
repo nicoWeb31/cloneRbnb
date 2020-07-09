@@ -3,31 +3,67 @@
 {% block title %}Nos magnifique annonce{% endblock %}
 
 {% block body %}
-<div class="_ad-title" style="background-image: url({{ad.coverImage}});" >
+    <div class="_ad-title" style="background-image: url({{ad.coverImage}});" >
 
-    <div class="container">
-        <h1 class="my-4">{{ad.title}}</h1>
-        <p>{{ad.introduction}}</p>
-        <p class="h2">
-            <strong>{{ad.rooms}} Chambres</strong> pour <strong>{{ad.price}} €</strong> par nuit
-        </p>
+        <div class="container _ad-title">
+            <h1 class="my-4">{{ad.title}}</h1>
+            <p>{{ad.introduction}}</p>
+            <p class="h2">
+                <strong>{{ad.rooms}} Chambres</strong> pour <strong>{{ad.price}} €</strong> par nuit
+            </p>
 
 
-            <a href="#" class="btn btn-primary"> Réserver !</a>
+                <a href="#" class="btn btn-primary"> Réserver !</a>
 
+        </div>
     </div>
-
 
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mb-3">
-                {{ ad.content }}
+            <div class="col-8 mb-3">
+                {{ ad.content | raw }}
+
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+
+                        {% for image in ad.images %}
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" class="{% if loop.first %}active{% endif %}"></li>
+                        {% endfor %}
+                            
+
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for image in ad.images %}
+                        <div class="carousel-item {% if loop.first %}active{% endif %} ">
+                            
+                        <img src="{{image.url}}" class="d-block w-100" alt="{{ad.title}}">
+
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>{{ad.title}}</h5>
+                            <p>{{image.caption}}</p>
+                        </div>
+
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
-            <div class="col">
+
+            <div class="col-4">
                 <div class="row">
                     <div class="col-4">
-                        <img src="http://plachold.it/64x64" alt="avatar">
+                        <img src="http://placehold.it/64x64" alt="avatar">
                     </div>
                     <div class="col">
                         <h3>Toto</h3>
@@ -44,7 +80,6 @@
     
 
 
-</div>
 
 
 
