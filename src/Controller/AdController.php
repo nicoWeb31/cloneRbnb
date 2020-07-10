@@ -6,6 +6,7 @@ use App\Entity\Ad;
 use App\Repository\AdRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class AdController extends AbstractController
 {
@@ -30,16 +31,38 @@ class AdController extends AbstractController
     /**
      * @Route("/ads/new", name="ads_create")
      */
-    public function create(Ad $ad){
+    public function create(){
+
+
+        $ad = new Ad();
+        $form = $this->createFormBuilder($ad)
+            ->add('title')
+            ->add('introduction')
+            ->add('content')
+            ->add('rooms')
+            ->add('price')
+            ->add('coverImage')
+            ->add('save', SubmitType::class, [
+                'label' => 'creer la nouvelle annonce',
+                'attr'=> [
+                    'class' => 'btn btn-primary'
+                ]
+            ])
+
+            ->getForm();
+
+
+
+
     
         return $this->render('ad/create.html.twig', [
-            'ad'=> $ad
+            'form'=> $form->createView()
         ]);
     }
 
 
 
-    
+
 
     /**
      * @Route("/ads/{slug}", name="ads_show")
