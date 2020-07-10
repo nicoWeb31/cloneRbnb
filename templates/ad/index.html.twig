@@ -9,6 +9,10 @@
 
     <div class="row">
         {% for ad in ads %}
+
+        {# declaration de varible twig #}
+        {% set url = path('ads_show',{'slug': ad.slug})  %}
+
         <div class="col-md-4">
             <div class="card border-dark mb-3" style="max-width: 20rem;">
                 <div class="card-header text-center">
@@ -18,15 +22,18 @@
                 </div>
 
 
-                <a href="{{path('ads_show',{'slug': ad.slug })}}">
+                <a href="{{ url }}">
                     <img src="{{ad.coverImage}}" alt="img" style="height: 200px; width : 100%; display: block ">
                 </a>
 
                 
                 <div class="card-body">
-                    <h4 class="card-title">{{ad.title}}</h4>
+                    <a href="{{ url }}">
+                        <h4 class="card-title">{{ad.title}}</h4>
+                    </a>
+
                     <p class="card-text">{{ad.introduction}}</p>
-                    <a href="{{path('ads_show',{'slug': ad.slug })}}" class="btn btn-secondary">En savoir plus</a>
+                    <a href="{{ url }}" class="btn btn-secondary">En savoir plus</a>
                 </div>
             </div>
         </div>

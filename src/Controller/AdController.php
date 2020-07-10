@@ -22,6 +22,24 @@ class AdController extends AbstractController
             'ads'=> $ads
         ]);
     }
+    
+
+
+
+
+    /**
+     * @Route("/ads/new", name="ads_create")
+     */
+    public function create(Ad $ad){
+    
+        return $this->render('ad/create.html.twig', [
+            'ad'=> $ad
+        ]);
+    }
+
+
+
+    
 
     /**
      * @Route("/ads/{slug}", name="ads_show")
@@ -39,4 +57,28 @@ class AdController extends AbstractController
             'ad'=> $ad
         ]);
     }
+
+
+
+    //ou 
+
+
+    /**
+     * @Route("/ads/{slug}", name="ads_show")
+     */
+    // public function show(Ad $ad)
+
+    //     return $this->render('ad/show.html.twig', [
+    //         'ad'=> $ad
+    //     ]);
+    // }
+
+
+
+
+
+
+
+
+
 }
