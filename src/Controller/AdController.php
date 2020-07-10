@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Ad;
+use App\Form\AdType;
 use App\Repository\AdRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdController extends AbstractController
 {
@@ -31,30 +34,31 @@ class AdController extends AbstractController
     /**
      * @Route("/ads/new", name="ads_create")
      */
-    public function create(){
+    public function create(Request $req, EntityManagerInterface $man){
 
 
         $ad = new Ad();
-        $form = $this->createFormBuilder($ad)
-            ->add('title')
-            ->add('introduction')
-            ->add('content')
-            ->add('rooms')
-            ->add('price')
-            ->add('coverImage')
-            ->add('save', SubmitType::class, [
-                'label' => 'creer la nouvelle annonce',
-                'attr'=> [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
+        $form = $this->createForm(AdType::class,$ad);
+        $form->handleRequest($req);
 
-            ->getForm();
+        if($form->isSubmitted() && $form->isValid()){
+
+        $man->persist($ad);
+        $man->flush();
+
+        $this->addFlash(
+            'success', 
+            "l\'annonce <strong>{$ad->getTitle()}</strong> a bien été enregistrée !"
+        );
+
+        return $this->redirectToRoute('ads_show', [
+            'slug'=>$ad->getSlug()
+        ]);
 
 
+        }
 
 
-    
         return $this->render('ad/create.html.twig', [
             'form'=> $form->createView()
         ]);
