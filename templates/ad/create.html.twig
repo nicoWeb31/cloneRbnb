@@ -17,6 +17,7 @@
     {# {{ dump() }} #}
     
     {{ form_widget(form)}}
+    <input type="hidden" id="widget-counter" value="0">
     
     <button type="submit" class="btn btn-primary">Creer une nouvelle annonce</button>
     {{ form_end(form)}}
@@ -76,16 +77,17 @@
 <script>
     $("#addimage").click(function(){
         //je recupere le num des future champs
-        const index = $('#ad_images div.form-group').length;
+        const index = +$('#widget-counter').val();
+
 
         //je recupere le prototype des entrees
         const tmpl = $('#ad_images').data('prototype').replace(/__name__/g, index );
-        console.log(tmpl)
-        
+
 
         //j'inject ce code dans la div
         $('#ad_images').append(tmpl);
 
+        $('#widget-counter').val(index + 1);
 
         //je gere le btn suppr
         handleDelteButton();

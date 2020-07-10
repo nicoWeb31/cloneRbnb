@@ -23,14 +23,15 @@ class AdType extends AbstractType
      * permet d'avoir la config de base d'un chapms
      * 
      */
-    private function getConfiguration($label, $placeholder){
+    private function getConfiguration($label, $placeholder, $option=[]){
 
-        return [
+        //array merge fusionne deux tableaux
+        return array_merge([
             'label' => $label,
             'attr' => [
                 'placeholder' => $placeholder
             ]
-        ];
+            ],$option);
 
     }
 
@@ -46,7 +47,9 @@ class AdType extends AbstractType
                 $this->getConfiguration('Titre','Tapez un super Titre pour votre annonce !')
             )
             ->add('slug',TextType::class,
-                $this->getConfiguration('Adress web','Tapez Tapez l\'adresse web (facultatif) !')
+                $this->getConfiguration('Adress web','Tapez Tapez l\'adresse web (facultatif) !',[
+                    'required' => false
+                ])
             )
             ->add('introduction',TextType::class,
                 $this->getConfiguration('Introduction','Donnez un introduction rapide')
