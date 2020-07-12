@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * 
  * 
  * cycle de vie de l'entité
- * @ORM\HasLifecycleCallbacks
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(
  * fields={"title"},
  * message = "Une autre annonce possede deja le même titre, veuillez le modifier!"
