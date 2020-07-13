@@ -8,9 +8,19 @@ use App\Entity\User;
 use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+
+private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
+
     public function load(ObjectManager $manager)
     {
 
@@ -31,15 +41,16 @@ class AppFixtures extends Fixture
             $pictureId = mt_rand(1,99) . '.jpg';
 
             $picture .= ($genre == 'male' ? 'men/' : 'women/').$pictureId ;
-
             $user = new User();
+            $hash = $this->encoder->encodePassword($user, 'password');
+
             $user->setFirstName($faker->firstName($genre))
             ->setLastName($faker->lastName())
             ->setEmail($faker->email())
             ->setIntroduction($faker->sentence())
             ->setDescription($content)
             ->setPicture($picture)
-            ->setHash('password');
+            ->setHash($hash);
 
             $manager->persist($user);
             $users[] = $user;
