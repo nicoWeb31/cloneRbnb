@@ -22,6 +22,7 @@ class RegistrationType extends AbstractUtilsType
             ->add('email',EmailType::class, $this->getConfiguration("Email", "votre email ..."))
             ->add('picture', UrlType::class, $this->getConfiguration("Photo", "url de votre avatar ..."))
             ->add('hash', PasswordType::class, $this->getConfiguration("Mot de passe", "Choisissez un bon mot de passe ..."))
+            ->add('passwordConfirm', PasswordType::class,$this->getConfiguration("Confirmation de mot de passe","Confirmer mot de passe "))
             ->add('introduction', TextType::class, $this->getConfiguration("Introduction", "Présentez vous en quelque mots ..."))
             ->add('description', TextType::class, $this->getConfiguration("Description Détaillée","C'est le moment de vous preparer"))
         ;

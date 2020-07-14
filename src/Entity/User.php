@@ -8,10 +8,15 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ * fields={"email"},
+ * message="email deja utilisé")
  */
 class User implements UserInterface
 {
@@ -24,21 +29,25 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="Veuillez renseigner un email valide !")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Url(message="veuillez donner une url valide pour votre avatar !")
      */
     private $picture;
 
@@ -49,11 +58,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min=10, minMessage ="Votre introduction doit faire au moins 10 caractères")
      */
     private $introduction;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Length(min=100, minMessage ="Votre introduction doit faire au moins 100 caractères")
      */
     private $description;
 
@@ -67,6 +78,14 @@ class User implements UserInterface
      */
     private $ads;
 
+
+    /**
+     * comfirmation mdp
+     * @Assert\EqualTo(propertyPath = "hash", message ="mes mots des passe ne corresponde pas !")
+     */
+    public $passwordConfirm;
+    
+    
 
 
         /**
