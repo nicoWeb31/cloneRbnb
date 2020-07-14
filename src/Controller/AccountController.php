@@ -49,7 +49,7 @@ class AccountController extends AbstractController
         $form = $this->createForm(RegistrationType::class, $user);
         $form->handleRequest($req);
 
-        if($form->isSubmitted() && $form->isSubmitted()){
+        if($form->isSubmitted() && $form->isValid()){
 
 
             //on encode le password
@@ -67,8 +67,8 @@ class AccountController extends AbstractController
             );
 
             //redirect
-            $this->redirectToRoute('account_login');
-            
+            return $this->redirectToRoute('account_login');
+
         }
     
         return $this->render('account/register.html.twig',[
