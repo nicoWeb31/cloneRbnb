@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\PassUpdate;
 use App\Entity\User;
 use App\Form\AccountType;
+use App\Form\PassUpdateType;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -107,6 +109,64 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/profile.html.twig',[
+            'form'=>$form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/upDatePassword", name="upDatePassword")
+     * @return response
+     */
+    public function upDatePassword(Request $req,EntityManagerInterface $man,UserPasswordEncoderInterface $encode)
+    {
+        $passwordUpdate = new PassUpdate();
+
+        //creation formulaire
+        $form = $this->createForm(PassUpdateType::class,$passwordUpdate);
+        $form->handleRequest($req);
+
+        //recup l'utilisateur
+        $user = $this->getUser();
+
+
+        
+        if($form->isSubmitted() && $form->isValid()){
+            //verif du old pass 
+            if(!password_verify($passwordUpdate->getOldPassword(),$user->getHash())){
+
+                //gerer l'erreur
+
+                $this->addFlash('danger','Le mot de passe n\' pas valide ! ');
+
+
+            //redirection
+            return $this->redirectToRoute('account_login');
+
+
+            }else{
+
+                $user->setHash($encode->encodePassword($user,$passwordUpdate->getNewPass()));
+                
+                //save in bdd
+                $man->persist($user);
+                $man->flush();
+
+            //message flash
+            $this->addFlash('success','Modification du mot de passe avec succés ! ');
+
+
+            //redirection
+            return $this->redirectToRoute('account_login');
+        }
+
+
+            
+        }
+
+
+
+
+        return $this->render('account/upDatePassword.html.twig',[
             'form'=>$form->createView()
         ]);
     }
