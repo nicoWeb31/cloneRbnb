@@ -75,4 +75,15 @@ class AccountController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
+    /**
+     * @Route("/profile", name="profile")
+     * @return response
+     */
+    public function profile()
+    {
+        return $this->render('account/profile.html.twig');
+    }
+
 }
