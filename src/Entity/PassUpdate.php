@@ -19,7 +19,7 @@ class PassUpdate
     private $newPass;
 
     /**
-     * @Assert\EqualTo(propertyPath = "newPassword", message ="comfirmation incorrect")
+     * @Assert\EqualTo(propertyPath = "newPass", message ="comfirmation incorrect")
      */
     private $ComfirmPass;
 

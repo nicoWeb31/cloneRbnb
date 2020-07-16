@@ -11,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
@@ -134,13 +135,15 @@ class AccountController extends AbstractController
             //verif du old pass 
             if(!password_verify($passwordUpdate->getOldPassword(),$user->getHash())){
 
-                //gerer l'erreur
+                
+                // //gerer l'erreur
+                // $this->addFlash('danger','Le mot de passe n\' pas valide ! ');
+                // //redirection
+                // return $this->redirectToRoute('account_login');
 
-                $this->addFlash('danger','Le mot de passe n\' pas valide ! ');
+                $form->get('oldPassword')->addError(new FormError("le mot de passe que vous avez taper n'est pas votre mot de passe actuel"));
 
 
-            //redirection
-            return $this->redirectToRoute('account_login');
 
 
             }else{
@@ -159,12 +162,7 @@ class AccountController extends AbstractController
             return $this->redirectToRoute('account_login');
         }
 
-
-            
-        }
-
-
-
+    }
 
         return $this->render('account/upDatePassword.html.twig',[
             'form'=>$form->createView()
