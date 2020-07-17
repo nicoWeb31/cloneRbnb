@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Ad;
 use Faker\Factory;
+use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -25,6 +26,23 @@ private $encoder;
     {
 
         $faker = Factory::create('FR-fr');
+    
+        $adminRole = new Role();
+        $adminRole->setTitle('ROLE_ADMIN');
+        $manager->persist($adminRole);
+
+        $userAdmin = new User();
+        $userAdmin->setFirstName('nico')
+        ->setLastName('rio')
+        ->setEmail('nico.riot@free.fr')
+        ->setHash($this->encoder->encodePassword($userAdmin,'pass'))
+        ->setPicture('https://randomuser.me/api/portraits/men/23')
+        ->setIntroduction($faker->sentence())
+        ->setDescription('<p>' . join('<p></p>' , $faker->paragraphs(3)) . '</>')
+        ->addUserRole($adminRole);
+
+        $manager->persist($userAdmin);
+
 
         
 
