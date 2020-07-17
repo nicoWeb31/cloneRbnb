@@ -64,10 +64,16 @@
                 <div class="row">
                     {% set a = ad.author %}
                     <div class="col-4">
-                        <img class="_avatar _avatar-medium mx-3" src="{{a.picture}}" alt="avatar de {{a.FullName}}">
+                        <a href="{{path('user_show',{'slug':a.slug})}}">
+                            <img class="_avatar _avatar-medium mx-3" src="{{a.picture}}" alt="avatar de {{a.FullName}}">
+                        </a>
+
                     </div>
                     <div class="col">
-                        <h3>{{a.FullName}}</h3>
+                        <a href="{{path('user_show',{'slug':a.slug})}}">
+                            <h3>{{a.FullName}}</h3>
+                        </a>
+
                         <span class="badge badge-info">{{a.ads | length}}</span>
                     </div>
                 </div>
