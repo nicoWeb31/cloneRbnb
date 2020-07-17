@@ -36,7 +36,7 @@ private $encoder;
         ->setLastName('rio')
         ->setEmail('nico.riot@free.fr')
         ->setHash($this->encoder->encodePassword($userAdmin,'pass'))
-        ->setPicture('https://randomuser.me/api/portraits/men/23')
+        ->setPicture('https://randomuser.me/api/portraits/men/23.jpg')
         ->setIntroduction($faker->sentence())
         ->setDescription('<p>' . join('<p></p>' , $faker->paragraphs(3)) . '</>')
         ->addUserRole($adminRole);

@@ -9,6 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdController extends AbstractController
@@ -34,6 +36,10 @@ class AdController extends AbstractController
 
     /**
      * @Route("/ads/new", name="ads_create")
+     * securisation des methodes
+     * 
+     * 
+     * IsGranted("ROLE_USER")
      */
     public function create(Request $req, EntityManagerInterface $man){
 
@@ -76,6 +82,8 @@ class AdController extends AbstractController
 
     /**
      * @Route("/ads/{slug}/edit", name="ads_edit")
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()", message ="Cette annonce ne vous appartient pas !!")
+     * 
      * @return response
      */
     public function edit(Ad $ad, Request $req,EntityManagerInterface $man)

@@ -2,18 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\PassUpdate;
 use App\Entity\User;
 use App\Form\AccountType;
+use App\Entity\PassUpdate;
 use App\Form\PassUpdateType;
 use App\Form\RegistrationType;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AccountController extends AbstractController
 {
@@ -83,6 +84,8 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/profile", name="profile")
+     * @IsGranted("ROLE_USER")
+     * 
      * @return response
      */
     public function profile(Request $req,EntityManagerInterface $man)
@@ -116,6 +119,8 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/upDatePassword", name="upDatePassword")
+     * @IsGranted("ROLE_USER")
+     * 
      * @return response
      */
     public function upDatePassword(Request $req,EntityManagerInterface $man,UserPasswordEncoderInterface $encode)
@@ -174,6 +179,8 @@ class AccountController extends AbstractController
      * Permet d'afficher le profil de l'utilisateur connecté
      * 
      * @Route("/account", name="account")
+     * @IsGranted("ROLE_USER")
+     * 
      * @return response
      */
     public function account()
