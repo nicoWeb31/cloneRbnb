@@ -31,6 +31,7 @@ class AdController extends AbstractController
 
 
 
+
     /**
      * @Route("/ads/new", name="ads_create")
      */
@@ -48,7 +49,8 @@ class AdController extends AbstractController
             $image->setAd($ad);
             $man->persist($image);
         }
-        
+        $user = $this->getUser();
+        $ad->setAuthor($user);
         
         $man->persist($ad);
         $man->flush();
