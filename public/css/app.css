@@ -34,3 +34,9 @@ max-width: 128px;
 max-height: 64px;
 max-width: 64px;
 }
+
+._avatarMini{
+
+max-height: 24px;
+max-width: 24px;
+}
