@@ -89,11 +89,16 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=Role::class, mappedBy="users")
      */
     private $userRoles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="booker")
+     */
+    private $bookings;
     
     
 
 
-        /**
+    /**
      * init slug 
      * 
      * annotation du cycle de vie
@@ -122,6 +127,7 @@ class User implements UserInterface
     {
         $this->ads = new ArrayCollection();
         $this->userRoles = new ArrayCollection();
+        $this->ad = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -316,6 +322,14 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
     }
 
 }
