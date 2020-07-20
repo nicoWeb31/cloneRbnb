@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver l'annonce : {{ad.title}} !{% endblock %}
+
+
+{% form_theme form 'ad/_collection.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Réservez pour l'annonce : {{ ad.title }}</h1>
+    <p>
+        Vous êtes sur le point de resever le bien de <strong> {{ad.author.fullName}} </strong>, dite nous tout, on s'occupe du reste !
+    </p>
+
+    {{ form_start(form)}}
+    {# {{ dump() }} #}
+    <div class="alert alert-ligth">
+        <div class="row">
+            <div class="col">
+                {{form_row(form.startDate)}}
+            </div>
+            <div class="col">
+                {{form_row(form.endDate)}}
+            </div>
+        </div>
+    </div>
+
+    <h4>Montant du séjour : <sapn id="amout">.....</sapn> &euro;</h4>
+    <span id="days">0</span> nuit(s) à {{ad.price}}/ nuit
+
+    <button type="submit" class="btn btn-primary">Creer une nouvelle annonce</button>
+    
+    {{ form_end(form)}}
+    
+</div>
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+<script src="/js/ad.js"></script>
+
+{% endblock %}
