@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Ad;
+use App\Entity\Booking;
 use Faker\Factory;
 use App\Entity\Role;
 use App\Entity\User;
@@ -103,6 +104,36 @@ private $encoder;
 
 
                 }
+
+                //gestion des resa
+                for($j = 1; $j <= mt_rand(0,10); $j++ ){
+
+                    $booking = new Booking();
+
+                    $createdAt = $faker->dateTimeBetween('-6 months');
+                    $startDate = $faker->dateTimeBetween('-3 months');
+
+                    $duration = mt_rand(3,10);
+                    $endDate = (clone $startDate)->modify("+$duration day");
+
+                    $amount = $ad->getPrice() * $duration;
+
+                    $booker = $users[mt_rand(0, count($users) -1)];
+
+                    $booking->setBooker($booker)
+                    ->setAd($ad)
+                    ->setStartDate($startDate)
+                    ->setEndDate($endDate)
+                    ->setCreateAt($createdAt)
+                    ->setAmount($amount);
+
+                    $manager->persist($booking);
+
+                    
+
+
+                }
+
 
                 $manager->persist($ad);
 
