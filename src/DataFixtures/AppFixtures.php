@@ -122,6 +122,7 @@ private $encoder;
 
                     $booking->setBooker($booker)
                     ->setAd($ad)
+                    ->setComment($faker->paragraph())
                     ->setStartDate($startDate)
                     ->setEndDate($endDate)
                     ->setCreateAt($createdAt)
