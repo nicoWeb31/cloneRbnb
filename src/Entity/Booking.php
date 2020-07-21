@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=BookingRepository::class)
+ * 
+ * Exiplique a doctrine que l'entités doit gerer son cycle de vie
+ * @ORM\HasLifecycleCallbacks()
  */
 class Booking
 {
@@ -141,5 +144,34 @@ class Booking
         $this->comment = $comment;
 
         return $this;
+    }
+
+
+    /**
+     * Callback appeller a chaque resa
+     * @ORM\PrePersist
+     * @return void
+     */
+    
+    public function prePersist(){
+        if(empty($this->createAt)){
+            $this->createAt = new \DateTime();
+        }
+
+
+        //prix de l'annonce
+        if(empty($this->amount)){
+            $this->amount = $this->getDuration() * $this->getAd()->getPrice();
+        }
+    }
+
+    /**
+     * recupere la durée du sejour
+     */
+    public function getDuration(){
+        //diff methode date time renvoie la diff entre deux dates det type date interavle
+
+        $diff = $this->endDate->diff($this->createAt);
+        return $diff->days;
     }
 }
