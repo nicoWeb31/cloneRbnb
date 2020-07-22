@@ -18,7 +18,7 @@ class BookingType extends AbstractUtilsType
         
             ->add('startDate', DateType::class, $this->getConfiguration("Date d'arrivée","Votre date d'arrivée",["widget" => "single_text"]))
             ->add('endDate', DateType::class, $this->getConfiguration("Date de depart", "Votre date de départ",["widget" => "single_text"]))
-            ->add('comment', TextareaType::class, $this->getConfiguration(false,"Si vous avez un commentaire n'hétez pas à nous en faire part !"))
+            ->add('comment', TextareaType::class, $this->getConfiguration(false,"Si vous avez un commentaire n'hétez pas à nous en faire part !",["required" => false]))
         ;
     }
 
