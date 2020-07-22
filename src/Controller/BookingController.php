@@ -34,7 +34,7 @@ class BookingController extends AbstractController
             $man->persist($booking);
             $man->flush();
 
-            return $this->redirectToRoute('booking_success', [
+            return $this->redirectToRoute('booking_show', [
                 'id'=> $booking->getId()
             ]);
 
@@ -45,6 +45,22 @@ class BookingController extends AbstractController
         return $this->render('booking/book.html.twig',[
             'ad' => $ad,
             'form' => $form->createView()
+        ]);
+    }
+
+
+    /**
+     * @Route("/booking/{id}", name="booking_show")
+     * @IsGranted("ROLE_USER")
+     * @param Booking $booking
+     * @return response
+     */
+    public function bookShow(Booking $booking)
+    {
+
+
+        return $this->render('booking/booking_show.html.twig',[
+            'booking' => $booking
         ]);
     }
 }
