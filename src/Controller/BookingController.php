@@ -35,7 +35,8 @@ class BookingController extends AbstractController
             $man->flush();
 
             return $this->redirectToRoute('booking_show', [
-                'id'=> $booking->getId()
+                'id'=> $booking->getId(),
+                'success'=> true
             ]);
 
 

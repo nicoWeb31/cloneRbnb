@@ -13,6 +13,24 @@
     <div class="container">
         <h1>Votre resérvation (n°{{booking.id}})</h1>
 
+        {% if app.request.query.get('success') %}
+        <div>
+            <div class="alert alert-success">
+                <h4 class="alert-heading">Bravo !</h4>
+                <p>
+                    Votre réservation aurprés de <strong>
+                        <a href="{{path('user_show',{'slug': author.slug})}}">{{author.fullName}}</a>
+                    </strong>
+                    pour l'annonce 
+                    <strong>
+                        <a href="{{path('ads_show', {'slug' : ad.slug})}}">{{ad.title}}</a>
+                    </strong>
+                    à bien été prise en compte!
+                </p>
+            </div>
+        </div>
+        {% endif %}
+
         <div class="row">
             <div class="col">
                 <div class="alert alert-light">
@@ -74,7 +92,7 @@
 
                 {{ad.content | raw}}
                 <hr>
-                
+
                 <a href="{{path('ads_show', {'slug': ad.slug})}}" class="btn btn-primary">Voir l'annonces</a>
             </div>
 
