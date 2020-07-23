@@ -31,14 +31,22 @@ class BookingController extends AbstractController
             $booking->setBooker($user);
             $booking->setAd($ad);
             
+            //si les date ne sont pas disponible on stop est on renvoi
+            if(!$booking->isBookingDates()){
+                $this->addFlash('warning', "Les dates que vous avez choisie ne sont pas disponible");
+                
+            }else{
+                $man->persist($booking);
+                $man->flush();
+                return $this->redirectToRoute('booking_show', [
+                    'id'=> $booking->getId(),
+                    'success'=> true
+                ]);
+            }
+            
+            
 
-            $man->persist($booking);
-            $man->flush();
 
-            return $this->redirectToRoute('booking_show', [
-                'id'=> $booking->getId(),
-                'success'=> true
-            ]);
 
 
         }

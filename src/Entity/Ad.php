@@ -96,6 +96,32 @@ class Ad
 
 
     /**
+     * permet d'obtenir un tazbeau des jours non disponible
+     * @return array
+     */
+    public function getNotAvailableDAys()
+    {
+        $notAvaillablDay = [];
+        foreach($this->bookings as $booking){
+            //calculer les jours entre la date d'arriver et de depart voir methode range()
+            $result = range($booking->getStartDate()->getTimestamp(),
+            $booking->getStartDate()->getTimestamp(),
+            24 * 60 * 60 
+        );
+
+        $days = array_map(function ($dayTimstamp){
+            return new \DateTime(date('Y-m-d', $dayTimstamp));
+        }, $result);
+
+        $notAvaillablDay = array_merge($notAvaillablDay, $days);
+
+        }
+
+        return $notAvaillablDay;
+    }
+
+
+    /**
      * init slug 
      * 
      * annotation du cycle de vie

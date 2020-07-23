@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BookingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Stmt\Return_;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -35,13 +36,13 @@ class Booking
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Date(message="attention la date doit etre au bon format")
+     * @Assert\Type("\DateTimeInterface",message="attention la date doit etre au bon format")
      */
     private $startDate;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Assert\Date(message="attention la date doit etre au bon format")
+     * @Assert\Type("\DateTimeInterface",message="attention la date doit etre au bon format")
      */
     private $endDate;
 
@@ -60,6 +61,57 @@ class Booking
      * 
      */
     private $comment;
+
+
+    /**
+     * permet de recuperer un tableau des journnéés qui corespondes a ma resevation
+     * @return array
+     */
+    public function getDays()
+    {
+        $reslut = range($this->getStartDate()->getTimestamp(),
+        $this->getEndDate()->getTimestamp(),
+         24 * 60 * 60);
+
+        $days = array_map(function($dayTimesStamp){
+            return new \DateTime(date('Y-m-d', $dayTimesStamp));
+        }, $reslut);
+
+        return $days;
+    }
+
+
+
+    /**
+     * regarder si les dates sont disponibles
+     * @return bool
+     */
+    public function isBookingDates()
+    {
+
+        $formatDay = function($day){
+            return $day->format('Y-m-d');
+        };
+
+        //connaitre les dates impossible 
+        $notAvailableDays = $this->ad->getNotAvailableDAys();
+
+        //comparer avec les dates choisis
+        $bookingDays = $this->getDays();
+
+        //tableau qui convertit les timstapm e, chaine de carac 
+        $days = array_map($formatDay,$bookingDays);
+
+        //tableau qui convertit les timstamp, chaine de carac 
+        $NotAvailable = array_map($formatDay,$notAvailableDays);
+
+        foreach($days as $day){
+            if (array_search($day, $NotAvailable) !== false) return false;
+        }
+        return true;
+    }
+        
+
 
     public function getId(): ?int
     {
