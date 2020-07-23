@@ -105,7 +105,7 @@ class Ad
         foreach($this->bookings as $booking){
             //calculer les jours entre la date d'arriver et de depart voir methode range()
             $result = range($booking->getStartDate()->getTimestamp(),
-            $booking->getStartDate()->getTimestamp(),
+            $booking->getEndDate()->getTimestamp(),
             24 * 60 * 60 
         );
 
