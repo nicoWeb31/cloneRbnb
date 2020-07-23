@@ -32,14 +32,14 @@
             </div>
         </div>
     </div>
-
     <h4>Montant du séjour : <sapn id="amout">.....</sapn> &euro;</h4>
-    <span id="days">0</span> nuit(s) à {{ad.price}}/ nuit
+    <span id="days">0</span> nuit(s) à {{ad.price}} &euro;/ nuit
 
     <h2>Vous avez un Commentaire ?</h2>
     {{form_row(form.comment)}}
+    
 
-    <h2>Vous avez términé !</h2>
+    <h4 class="mt-3">Vous avez términé !</h4>
     <p>Vacance de rêve ? Hébergement pour le boulot ? Peu importe, on est avec vous !</p>
 
 
@@ -58,5 +58,56 @@
 
 <script src="/js/ad.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>
 
+<script>
+
+
+    $(document).ready(function(){
+        $('#booking_startDate, #booking_endDate').datepicker({
+            format: 'dd/mm/yyyy',
+            datesDisabled: [
+                {% for day in ad.notAvailableDAys %}
+                "{{ day.format('d/m/Y') }}",
+                {% endfor %}
+            ],
+            startDate: new Date()
+        });
+
+            $('#booking_startDate, #booking_endDate').on('change',calculAmount)
+
+    });
+
+
+
+function calculAmount(){
+
+    const endDate = new Date(
+        $('#booking_endDate')
+        .val()
+        .replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1')
+        );
+    console.log(endDate);
+
+    const startDate = new Date(
+        $('#booking_startDate')
+        .val()
+        .replace(/(\d+)\/(\d+)\/(\d{4})/, '$3-$2-$1')
+        );
+    console.log(startDate);
+
+    if( startDate && endDate && startDate < endDate){
+        const DATE_TIME = 24 * 60 * 60 * 1000;
+        const intervale = endDate.getTime() - startDate.getTime();
+        const days = intervale / DATE_TIME;
+
+        const amout = days * {{ ad.price }};
+
+    $('#days').text(days);
+    $('#amout').text(amout.toLocaleString('fr-FR'));
+
+    }
+}
+
+</script>
 {% endblock %}
