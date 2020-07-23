@@ -96,7 +96,7 @@ class Ad
 
 
     /**
-     * permet d'obtenir un tazbeau des jours non disponible
+     * permet d'obtenir un tableau des jours non disponible
      * @return array
      */
     public function getNotAvailableDAys()

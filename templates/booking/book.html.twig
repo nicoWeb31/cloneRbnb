@@ -2,6 +2,13 @@
 
 {% block title %}Réserver l'annonce : {{ad.title}} !{% endblock %}
 
+{% block stylesheets %}
+    {{parent()}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css">
+
+{% endblock %}
+
+
 
 {% form_theme form 'ad/_collection.html.twig' %}
 
@@ -42,6 +49,7 @@
     
 </div>
 
+
 {% endblock %}
 
 
@@ -49,5 +57,6 @@
 {% block javascripts %}
 
 <script src="/js/ad.js"></script>
+
 
 {% endblock %}

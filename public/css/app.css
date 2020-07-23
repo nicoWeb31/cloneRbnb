@@ -40,3 +40,7 @@ max-width: 64px;
 max-height: 24px;
 max-width: 24px;
 }
+
+.datepicker table tr td.disabled{
+    color: red !important;
+}
