@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\PrePersist;
+use App\Repository\CommentRepository;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class Comment
 {
@@ -43,6 +47,18 @@ class Comment
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
+
+
+    /**
+     * Date de creation 
+     * @ORM\PrePersist
+     * @return void
+     */
+    public function prePersiste(){
+        if(empty($this->createdAt)){
+            $this->createdAt = new \DateTime();
+        }
+    }
 
     public function getId(): ?int
     {
