@@ -191,4 +191,19 @@ class AccountController extends AbstractController
         ]);
     }
 
+
+    /**
+     * Permet d'afficher la liste des resa faite par l'utilisateur
+     * 
+     * @Route("/account/booking", name="account_booking")
+     * @IsGranted("ROLE_USER")
+     * 
+     * @return response
+     */
+    public function accountBooking()
+    {
+
+        return $this->render('account/accountBooking.html.twig');
+    }
+
 }
