@@ -77,6 +77,12 @@
                             {{comment.content}}
                         </blockquote>
                         <strong>Note donne par {{ comment.author.fullName }} :</strong>{{ comment.rating }}
+
+
+                        {# envoyer des variable a un include #}
+                        {# {% set rating = comment.rating %} #}
+                        {% include "partials/rating.html.twig", with {'rating':comment.rating} %}
+
                     </div>
                     
                 {% endfor %}
