@@ -66,6 +66,24 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+                {# comment #}
+                <hr>
+                {% if ad.comments | length > 0 %}
+                <h2 class="mb-3">Commentaire de nos voyageur</h2>
+                {% for comment in ad.comments %}
+                    <div class="bg-ligth rounded mb-3 p-3">
+                        <strong>{{ comment.author.fullName }} à dit :</strong>
+                        <blockquote>
+                            {{comment.content}}
+                        </blockquote>
+                        <strong>Note donne par {{ comment.author.fullName }} :</strong>{{ comment.rating }}
+                    </div>
+                    
+                {% endfor %}
+                {% else %}
+                    <h2>Cette annonce n'a pas encore reçu de commentaires .....</h2>
+                {% endif %}
+
             </div>
 
             <div class="col-4">
