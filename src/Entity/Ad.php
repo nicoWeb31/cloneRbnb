@@ -126,6 +126,20 @@ class Ad
         return $notAvaillablDay;
     }
 
+    /**
+     * moyenne des avis
+     */
+    public function getAverageRating(){
+
+        $sum = array_reduce($this->comments->toArray(),function($total,$comment){
+            return $total + $comment->getRating();
+        },0) ;
+    
+        if($this->comments->count()>0) return $sum/$this->comments->count();
+
+        return 0;
+    }
+
 
     /**
      * init slug 

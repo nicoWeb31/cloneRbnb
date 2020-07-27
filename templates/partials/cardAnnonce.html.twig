@@ -4,8 +4,14 @@
             <div class="card border-dark mb-3" style="max-width: 20rem;">
                 <div class="card-header text-center">
                     
-                    {{ad.rooms}} chambres, {{ad.price}} €/ nuit 
-                    <small>pas encore noté</small>
+                    {{ad.rooms}} chambres, {{ad.price}} €/ nuit <br>
+                    {% if ad.comments | length > 0 %}
+                    {% include "partials/rating.html.twig"  with {'rating' : ad.AverageRating } %}
+                    
+                    {% else %}
+                        <small>pas encore noté</small>
+                    {% endif %}
+                        
                 </div>
 
 

@@ -69,6 +69,21 @@
                 {# comment #}
                 <hr>
                 {% if ad.comments | length > 0 %}
+                <div class="alert alert-info">
+                    <h4 class="alert-heading">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                Note globale donnée par nos voyageur. 
+                            </div>
+                            <div class="col">
+                                {% include "partials/rating.html.twig" with {'rating':ad.AverageRating} %}
+                                <br>
+                                <small>(calculer sur {{ad.comments | length}} avis !)</small> 
+                            </div>
+                        </div>
+
+                    </h4>
+                </div>
                 <h2 class="mb-3">Commentaire de nos voyageur</h2>
                 {% for comment in ad.comments %}
                     <div class="bg-ligth rounded mb-3 p-3">
@@ -81,7 +96,7 @@
 
                         {# envoyer des variable a un include #}
                         {# {% set rating = comment.rating %} #}
-                        {% include "partials/rating.html.twig", with {'rating':comment.rating} %}
+                        {% include "partials/rating.html.twig" with {'rating':comment.rating} %}
 
                     </div>
                     
