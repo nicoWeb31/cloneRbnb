@@ -64,7 +64,7 @@ class BookingController extends AbstractController
      * @param EntityManagerInterface $man
      * @return response
      */
-    public function bookShow(Booking $booking,Request $req, EntityManagerInterface $man)
+    public function bookShow(Booking $booking,Request $req,EntityManagerInterface $man)
     {
 
         $comment = new Comment();

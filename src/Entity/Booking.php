@@ -23,7 +23,7 @@ class Booking
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="ad")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="bookings")
      * @ORM\JoinColumn(nullable=false)
      */
     private $booker;

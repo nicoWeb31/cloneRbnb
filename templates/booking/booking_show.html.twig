@@ -76,25 +76,26 @@
 
                     <a href="{{path("user_show", {'slug': author.slug})}}" class="btn btn-primary">Plus d'info sur {{ author.firstname}}</a>
                 </div>
-                <div class="alert alert-ligth">
+                <div class="alert alert-light" id="comment">
                     <h2 class="alert-heading">Votre avis compte !</h2>
                     {% if date() > date(booking.endDate) %}
                     {% set comment = booking.ad.getCommentFromUser(app.user) %}
                         {% if comment is not null  %}
-                        
+
                             <blockquote>
                                 {{comment.content}}
                             </blockquote>
                             <strong>
                                 Note : 
-                                {% include "partilas/rating.html.twig" with {'rating': comment.rating} %}
                             </strong>
+                                {% include "partials/rating.html.twig" with {'rating': comment.rating} %}
                         {% else %}
                             {# display form #}
                             {{ form_start(form) }}
                             {{ form_widget(form) }}
-                            {{ form_end(form) }} 
+
                             <button class="btn btn-primary"> Commenter </button>
+                            {{ form_end(form) }} 
                         {% endif %}
                             
                         
