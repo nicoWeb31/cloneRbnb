@@ -47,7 +47,7 @@
                         <dt class="col-md-4">Montant total</dt>
                         <dd class="col-md-8">{{booking.amount}} &euro;</dd>
                         <dt class="col-md-4">Commentaire</dt>
-                        <dd class="col-md-8">{{booking.comment}}</dd>
+                        <dd class="col-md-8">{{booking.comment | default('Aucun Commentaire')}}</dd>
 
 
 
@@ -75,6 +75,21 @@
                     {{author.description | raw }}
 
                     <a href="{{path("user_show", {'slug': author.slug})}}" class="btn btn-primary">Plus d'info sur {{ author.firstname}}</a>
+                </div>
+                <div class="alert alert-ligth">
+                    <h2 class="alert-heading">Votre avis compte !</h2>
+                    {% if date() > date(booking.endDate) %}
+                    {# display form #}
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }} 
+                    <button class="btn btn-primary"> Commenter </button>
+                        
+
+                    {% else %}
+                    <p>Vous ne pourrait pas notter cette annonce avant la fin de votre voyages ! </p>
+                        
+                    {% endif %}
                 </div>
             </div>
 

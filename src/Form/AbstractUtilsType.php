@@ -19,7 +19,7 @@ class AbstractUtilsType extends AbstractType{
         protected function getConfiguration($label, $placeholder, $option=[]){
     
             //array merge fusionne deux tableaux
-            return array_merge([
+            return array_merge_recursive([
                 'label' => $label,
                 'attr' => [
                     'placeholder' => $placeholder
