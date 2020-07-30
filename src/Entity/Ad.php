@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
 use Cocur\Slugify\Slugify;
 use App\Repository\AdRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -127,7 +128,22 @@ class Ad
     }
 
     /**
+     * look if user have comment this ad
+     * @param User $author
+     * @return Comment|null
+     * 
+     */
+
+    public function getCommentFromUser(User $author){
+        foreach($this->comments->toArray() as $comment){
+        if ($comment->getAuthor() === $author) return $comment;
+        }
+        return null;
+    }
+
+    /**
      * moyenne des avis
+     * @return float
      */
     public function getAverageRating(){
 

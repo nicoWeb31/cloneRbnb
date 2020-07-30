@@ -79,11 +79,24 @@
                 <div class="alert alert-ligth">
                     <h2 class="alert-heading">Votre avis compte !</h2>
                     {% if date() > date(booking.endDate) %}
-                    {# display form #}
-                    {{ form_start(form) }}
-                    {{ form_widget(form) }}
-                    {{ form_end(form) }} 
-                    <button class="btn btn-primary"> Commenter </button>
+                    {% set comment = booking.ad.getCommentFromUser(app.user) %}
+                        {% if comment is not null  %}
+                        
+                            <blockquote>
+                                {{comment.content}}
+                            </blockquote>
+                            <strong>
+                                Note : 
+                                {% include "partilas/rating.html.twig" with {'rating': comment.rating} %}
+                            </strong>
+                        {% else %}
+                            {# display form #}
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            {{ form_end(form) }} 
+                            <button class="btn btn-primary"> Commenter </button>
+                        {% endif %}
+                            
                         
 
                     {% else %}
