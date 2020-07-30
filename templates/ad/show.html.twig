@@ -9,7 +9,7 @@
             <h1 class="my-4">{{ad.title}}</h1>
             <p>{{ad.introduction}}</p>
             <p class="h2">
-                <strong>{{ad.rooms}} Chambres</strong> pour <strong>{{ad.price}} €</strong> par nuit
+                <strong>{{ad.rooms}} Chambres</strong> pour <strong>{{ad.price | number_format(2,',',' ')}} &euro; </strong> par nuit.
             </p>
 
 

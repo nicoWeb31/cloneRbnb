@@ -9,6 +9,13 @@ div.container{
     background-position: center;
 }
 
+
+._ad-title .btn{
+margin-top: 2em;
+font-size: 1.5em;
+line-height: 1.5em;
+}
+
 div._ad-title h1,div._ad-title p {
 
     color:white;
@@ -47,4 +54,11 @@ max-width: 24px;
 
 .rating i{
     color : goldenrod
+}
+
+.alert a {
+    text-decoration: none;
+}
+.alert .btn{
+    color: aliceblue;
 }

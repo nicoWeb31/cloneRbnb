@@ -10,7 +10,7 @@
 
 
     <div class="container">
-        <h1>Votre resérvation (n°{{booking.id}})</h1>
+        <h1 class ="my-5">Votre resérvation (n°{{booking.id}})</h1>
 
         {% if app.request.query.get('success') %}
         <div>
@@ -45,7 +45,7 @@
                         <dt class="col-md-4">Nombre de nuits</dt>
                         <dd class="col-md-8">{{booking.duration}}</dd>
                         <dt class="col-md-4">Montant total</dt>
-                        <dd class="col-md-8">{{booking.amount}} &euro;</dd>
+                        <dd class="col-md-8">{{booking.amount | number_format(2,',',' ')}} &euro;</dd>
                         <dt class="col-md-4">Commentaire</dt>
                         <dd class="col-md-8">{{booking.comment | default('Aucun Commentaire')}}</dd>
 

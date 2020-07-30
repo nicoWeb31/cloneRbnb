@@ -4,7 +4,7 @@
             <div class="card border-dark mb-3" style="max-width: 20rem;">
                 <div class="card-header text-center">
                     
-                    {{ad.rooms}} chambres, {{ad.price}} €/ nuit <br>
+                    {{ad.rooms}} chambres, {{ad.price | number_format(2,',',' ') }} &euro;  par nuit. <br>
                     {% if ad.comments | length > 0 %}
                     {% include "partials/rating.html.twig"  with {'rating' : ad.AverageRating } %}
                     
@@ -26,7 +26,7 @@
                     </a>
 
                     <p class="card-text">{{ad.introduction}}</p>
-                    <a href="{{ url }}" class="btn btn-secondary p-2">En savoir plus</a>
+                    <a href="{{ url }}" class="btn btn-primary float-right p-2">En savoir plus</a>
                     {% if app.user and app.user == ad.author %}
                     <a href="{{path('ads_edit',{'slug':ad.slug})}}" class="btn btn-secondary p-2">Modifier l'annonce !</a>
                     
