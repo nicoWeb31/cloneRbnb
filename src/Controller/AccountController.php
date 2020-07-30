@@ -44,7 +44,7 @@ class AccountController extends AbstractController
     }
 
     /**
-     * permet d'afficher le formulaire de s'inscrire
+     * permet d'afficher le formulaire de s'inscrire 
      * @Route("/register", name="register")
      * @return Response
      */
@@ -57,7 +57,7 @@ class AccountController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 
 
-            //on encode le password
+            //on encode le password via l'algorythm de codage
             $pass = $encode->encodePassword($user, $user->getHash());
             $user->setHash($pass);
 
