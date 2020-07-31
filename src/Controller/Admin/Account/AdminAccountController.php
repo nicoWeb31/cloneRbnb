@@ -17,11 +17,23 @@ class AdminAccountController extends AbstractController
         $error = $utils->getLastAuthenticationError();
         $username = $utils->getLastUsername();
         return $this->render('admin/admin_account/index.html.twig',[
-            
+
             'hasError' => $error !==  null,
             'username' => $username 
 
         ]);
 
     }
+
+
+    /**
+     * @Route("/admin/logout", name="logout_admin")
+     * @return void
+     */
+    public function logout()
+    {
+        //
+    }
+
+
 }

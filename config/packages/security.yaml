@@ -30,8 +30,8 @@ security:
                 check_path: admin_account_login
 
             logout:
-                path: logout
-                target: admin_account_login   
+                path: logout_admin
+                target: homePage
 
         main:
             anonymous: true
