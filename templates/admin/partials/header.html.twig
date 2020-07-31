@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+    <a class="navbar-brand" href="{{path('homePage')}}">SimBnB</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                <i class="fa fa fa-line-chart"></i>
+                DashBoard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{path('admin_ads_index')}}">
+                <i class="fa fa-bed" aria-hidden="true"></i>
+                Annonces</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                <i class="fa fa-folder" aria-hidden="true"></i>
+                Réservation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                <i class="fa fa-comment" aria-hidden="true"></i>
+                Commentaire</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                Users</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="{{path('homePage')}}" class="nav-link" target="_blank">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                    voir le site
+                </a>
+            </li>
+            {% if app.user %}
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="accountDropdownLink" data-toggle="dropdown">
+                        <img src="{{app.user.picture}}" alt="avatar de {{app.user.fullName}}" class="_avatar _avatarMini">
+                        {{app.user.fullName}}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-rigth" aria-labelledby="accountDropdownLink">
+                        
+
+                        <a href="{{path('logout')}}" class="dropdown-item">Déconnexion</a>
+
+                    </div>
+                </li>
+            
+                
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+
+
+{% for label, messages in app.flashes %}
+<div class="container">
+    <div class="alert alert-{{label}}">
+        {% for message in messages %}
+        <p>{{message | raw}}</p>
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
