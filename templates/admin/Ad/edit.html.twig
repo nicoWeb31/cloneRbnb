@@ -1,0 +1,117 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modification de l'annonce {{ad.id}}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+<h1>Modification de l'annonce {{ad.id}}</h1>
+
+{{form_start(form)}}
+<div class="row">
+    <div class="col">
+        <div class="card bg-ligth">
+            <div class="card-header">
+                <h4>Corriger l'annonce?</h4>
+            
+            </div>
+            <div class="card-body">
+                {{form_widget(form)}}
+                <button type="submit" class="btn btn-primary">
+                <i class="fa fa-check" aria-hidden="true"></i>
+                Enregistrer</button>
+            
+            </div>
+        
+        </div>
+    </div>
+    <div class="col">
+        <div class="card bg-ligth">
+            <div class="card-header">
+                <h4>Les réservation </h4>
+            
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Voyageur</td>
+                            <td>Date de réservation</td>
+                            <td></td>                        
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for book in ad.bookings %}
+                        <tr>
+                            <td>{{book.id}}</td>
+                            <td>{{book.booker.fullName}}</td>
+                            <td>{{book.createAt | date('d/m/Y H:i')}}</td>
+                            <td>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+                
+            
+            </div>
+        </div>
+
+        <div class="card bg-ligth mt-5">
+            <div class="card-header">
+                <h4>Les Commentaires</h4>
+            
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>ID</td>
+                            <td>Voyageur</td>
+                            <td>Note</td>
+                            <td>Contenus</td>                        
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for comment in ad.comments %}
+                        <tr>
+                            <td>{{comment.id}}</td>
+                            <td>{{comment.author.fullName}}</td>
+                            <td>{{comment.rating }}</td>
+                            <td>{{comment.content }}</td>
+
+                            <td>
+                                <a href="#" class="btn btn-primary">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+                
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+{{form_end(form)}}
+
+
+
+</div>
+
+
+
+{% endblock %}
