@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adminstration des annonces{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <h1 class="my-5">Gestions des annonces</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Réservation</th>
+                <th>Note</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for ad in ads %}
+                <tr>
+                    <td>{{ad.id}}</td>
+                    <td>{{ad.title}}</td>
+                    <td>
+                        <img src="{{ad.author.picture}}" alt="avatar" class="_avatar _avatarMini mr-2">
+                        {{ad.author.fullName}}
+                    </td>
+                    <td>
+                        <span class="badge badge-primary rounded">{{ad.bookings | length}}</span>
+                    </td> 
+
+                    <td>
+                        <span class="badge badge-primary rounded">{{ad.getAverageRating | number_format(1,',',' ')}}</span>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
