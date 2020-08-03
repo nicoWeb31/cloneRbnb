@@ -54,5 +54,32 @@ class AdminController extends AbstractController
         ]);
     }
 
-    
+    /**
+     * @Route("/admin/ads/{id}/delete", name="admin_ads_delete")
+     * 
+     * @return response
+     */
+    public function delete(Ad $ad, EntityManagerInterface $man)
+    {
+
+        if(count($ad->getBookings()) > 0){
+            $this->addFlash('warning',"Impossible de suppimer cette annonce <strong> {$ad->getTitle()} </strong>, des résevation sont en cour !");
+        }else{
+
+
+            $man->remove($ad);
+            $man->flush();
+            $this->addFlash(
+                'success',
+                "L'annonce <strong> {$ad->getTitle()} </strong> à bien été supprimée !"
+            );
+
+        }
+
+
+        return $this->redirectToRoute('admin_ads_index');
+
+    }
+
+
 }
