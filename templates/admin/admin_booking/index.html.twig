@@ -22,7 +22,7 @@
         </thead>
 
         <tbody>
-            {% for book in bookings %}
+            {% for book in paginations.data %}
                 <tr>
                     <td>{{book.id}}</td>
                     <td>{{book.createAt | date('d/m/Y')}}</td>
@@ -47,6 +47,13 @@
             {% endfor %}
         </tbody>
     </table>
+
+{# pagination #}
+    {% set nbrPage = paginations.pages %}
+    {% set page = paginations.currentPage %}
+    {% include "admin/partials/pagination.html.twig" with {'nbrPages':nbrPage,'page':page} %}
+
+
 </div>
 
 

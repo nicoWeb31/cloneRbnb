@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
+use App\Service\PaginationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,23 +17,14 @@ class AdminController extends AbstractController
      * Requirement pour contraindre les paramatre d'url ou {page<\d+>?1}  ? pour optionnel et 1 pour la valleur par default
      * @Route("/admin/ads/{page}", name="admin_ads_index", requirements={"page":"\d+"})
      */
-    public function index(AdRepository $repo,$page = 1)
+    public function index($page,PaginationService $pagi)
     {
 
-        $limit = 10;
-        $start = $page * $limit - $limit ;
-        //1 * 10 - 10 = 0
-        
-        $adPagin = $repo->findBy([],[],$limit,$start);
-        $total = count($repo->findAll());
-        $nbrPage = ceil($total / $limit);
-
+        $pagi->setEntityClass(Ad::class)
+        ->setCurrentPage($page);
 
         return $this->render('admin/Ad/index.html.twig',[
-            'ads' => $adPagin,
-            'total' =>$total,
-            'nbrPage' => $nbrPage,
-            'page'=>$page
+            'paginations' => $pagi
         ]);
     }
 

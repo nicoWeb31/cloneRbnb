@@ -22,7 +22,7 @@
         </thead>
 
         <tbody>
-            {% for comment in comments %}
+            {% for comment in paginations.data %}
                 <tr>
                     <td>{{comment.id}}</td>
                     <td>{{comment.ad.title}}</td>
@@ -53,6 +53,12 @@
             {% endfor %}
         </tbody>
     </table>
+    {# pagination #}
+    {% set nbrPage = paginations.pages %}
+    {% set page = paginations.currentPage %}
+
+{% include "admin/partials/pagination.html.twig" with {'nbrPages':nbrPage,'page':page} %}
+
 </div>
 
 
