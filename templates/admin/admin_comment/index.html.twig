@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administartion des commentaires !{% endblock %}
+
+
+{% block body %}
+
+<div class="container-fluid">
+    <h1 class="my-5">Gestions des Commentaires</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Annonce</th>
+                <th>Auteur</th>
+                <th>Date de creation</th>
+                <th>Note</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for comment in comments %}
+                <tr>
+                    <td>{{comment.id}}</td>
+                    <td>{{comment.ad.title}}</td>
+                    <td>
+                        <img src="{{comment.author.picture}}" alt="avatar" class="_avatar _avatarMini mr-2">
+                        {{comment.author.fullName}}
+                    </td>
+                    <td>
+                        <span class="badge badge-primary rounded">{{comment.createdAT | date }}</span>
+                    </td> 
+
+                    <td>
+                        <span class="badge badge-primary rounded">{{comment.ad.getAverageRating | number_format(1,',',' ')}}</span>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-warning"><i class="fa fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+{% endblock %}
