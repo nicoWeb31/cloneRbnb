@@ -37,7 +37,7 @@ class Booking
     /**
      * @ORM\Column(type="datetime")
      * @Assert\Type("\DateTimeInterface",message="attention la date doit etre au bon format")
-     * @Assert\GreaterThan("today", message="la date d'arriver doit etre supperieur a la date d'aujourd'hui")
+     * @Assert\GreaterThan("today", message="la date d'arriver doit etre supperieur a la date d'aujourd'hui", groups={"front"})
      */
     private $startDate;
 
@@ -206,8 +206,9 @@ class Booking
 
 
     /**
-     * Callback appeller a chaque resa
+     * Callback appeller a chaque creation de resa ou a chaque mise a jour  
      * @ORM\PrePersist
+     * @Orm\PreUpdate
      * @return void
      */
     

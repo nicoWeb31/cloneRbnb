@@ -43,6 +43,8 @@ class BookingType extends AbstractUtilsType
     {
         $resolver->setDefaults([
             'data_class' => Booking::class,
+            //possiblilité de noter les groupes de validation
+            'Validation_groups' => ["Default", "front"]
         ]);
     }
 }

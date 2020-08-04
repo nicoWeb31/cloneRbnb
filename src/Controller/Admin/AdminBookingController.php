@@ -38,6 +38,9 @@ class AdminBookingController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
 
+            // on met le montant a zero pour qu'a la mise a jour de l'entites le preUpdate soit utilisé (car jugé empty, a zero)
+
+            $booking->setAmount(0);
             $man->persist($booking);
             $man->flush();
 
@@ -51,6 +54,23 @@ class AdminBookingController extends AbstractController
             'form'=>$form->createView(),
             'booking'=>$booking
         ]);
+
+    }
+
+     /**
+     * for delete a booking
+     * @Route("/admin/booking/{id}/delete", name="admin_booking_delete")
+     * @return response
+     */
+    public function delete(Booking $booking, EntityManagerInterface $man)
+    {
+
+        $man->remove($booking);
+        $man->flush();
+        $this->addFlash('success', "Resevation supprimer avec succés");
+
+        return $this->redirectToRoute('admin_booking_index');
+
 
     }
 }
