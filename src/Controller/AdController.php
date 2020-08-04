@@ -24,6 +24,19 @@ class AdController extends AbstractController
 
         //$repo = $this->getDoctrine()->getRepository(Ad::class);
         $ads = $repo->findAll();
+
+        // //find : permet de retrouver un enregistrement via  son id
+        // $ad= $repo->find(456);
+
+        // //findByOne : permet de retrouver un enregistrement via la valeur d'un ou plusieur attribue
+        // $adBO = $repo->findOneBy(['title' => 'nomDuTitle']);
+
+
+        // //findBy : permet de retrouver plusieur enregistrements via la valeur d'un ou plusieur attribue, avec options look les options
+        // $adBy = $repo->findBy([],[],5,0);
+
+
+        
         return $this->render('ad/index.html.twig', [
             'ads'=> $ads
         ]);

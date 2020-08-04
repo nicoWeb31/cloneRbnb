@@ -13,13 +13,26 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin/ads", name="admin_ads_index")
+     * Requirement pour contraindre les paramatre d'url ou {page<\d+>?1}  ? pour optionnel et 1 pour la valleur par default
+     * @Route("/admin/ads/{page}", name="admin_ads_index", requirements={"page":"\d+"})
      */
-    public function index(AdRepository $repo)
+    public function index(AdRepository $repo,$page = 1)
     {
 
+        $limit = 10;
+        $start = $page * $limit - $limit ;
+        //1 * 10 - 10 = 0
+        
+        $adPagin = $repo->findBy([],[],$limit,$start);
+        $total = count($repo->findAll());
+        $nbrPage = ceil($total / $limit);
+
+
         return $this->render('admin/Ad/index.html.twig',[
-            'ads' => $repo->findAll()
+            'ads' => $adPagin,
+            'total' =>$total,
+            'nbrPage' => $nbrPage,
+            'page'=>$page
         ]);
     }
 
