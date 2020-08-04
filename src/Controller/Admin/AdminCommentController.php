@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use function PHPSTORM_META\map;
+
 class AdminCommentController extends AbstractController
 {
     /**
@@ -44,7 +46,7 @@ class AdminCommentController extends AbstractController
             $man->persist($comment);
             $man->flush();
 
-            $this->addFlash('success', "commentaire modifier avec succès !");
+            $this->addFlash('success', "Le commentaire {$comment->getId()} à étét modifier avec succès !");
             return $this->redirectToRoute('admin_comment_index');
 
         }
@@ -53,6 +55,25 @@ class AdminCommentController extends AbstractController
             'comment' => $comment,
             'form'=>$form->createView()
         ]);
+    }
+
+
+
+
+    /**
+     * for delete a comment in administartion
+     * @Route("/admin/comments/{id}/delete", name="admin_comment_delete")
+     * @return response
+     */
+    public function delete(Comment $comment, EntityManagerInterface $man)
+    {
+
+        $man->remove($comment);
+        $man->flush();
+
+        $this->addFlash('success', "le Commentaire de <strong>{$comment->getAuthor()->getFullName()}</strong> à été supprimé avec succées ! ");
+        return $this->redirectToRoute('admin_comment_index');
+
     }
 
 }
