@@ -51,7 +51,7 @@
 {# pagination #}
     {% set nbrPage = paginations.pages %}
     {% set page = paginations.currentPage %}
-    {% include "admin/partials/pagination.html.twig" with {'nbrPages':nbrPage,'page':page} %}
+    {% include "admin/partials/pagination.html.twig" with {'nbrPages':nbrPage,'page':page, 'route':'admin_booking_index'} %}
 
 
 </div>
