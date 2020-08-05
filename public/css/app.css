@@ -1,6 +1,6 @@
 
-div.container{
-    margin-top: 20px;
+div.container, div.container-fluid{
+    margin-top: 20px !important;
 }
 
 ._ad-title{
