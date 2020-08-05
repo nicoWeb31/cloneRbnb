@@ -102,6 +102,9 @@
     "fzaninotto/faker": {
         "version": "v1.9.1"
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.4"
+    },
     "monolog/monolog": {
         "version": "2.1.0"
     },
@@ -287,9 +290,6 @@
         "version": "v5.1.2"
     },
     "symfony/http-kernel": {
-        "version": "v5.1.2"
-    },
-    "symfony/inflector": {
         "version": "v5.1.2"
     },
     "symfony/intl": {
@@ -558,6 +558,9 @@
     },
     "twig/twig": {
         "version": "v3.0.3"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "webmozart/assert": {
         "version": "1.9.0"
