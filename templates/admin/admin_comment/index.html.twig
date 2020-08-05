@@ -57,7 +57,8 @@
     {% set nbrPage = paginations.pages %}
     {% set page = paginations.currentPage %}
 
-{% include "admin/partials/pagination.html.twig" with {'nbrPages':nbrPage,'page':page,'route':'admin_comment_index'} %}
+{# utilisation du render du service gination #}
+{{paginations.render()}}
 
 </div>
 
